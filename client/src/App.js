@@ -41,8 +41,12 @@ class App extends Component {
   };
   
   listenToPaymentEvent = () => {
+    let self = this;
     this.itemManager.events.SupplyChainStep().on("data", async function(evt) {
       console.log(evt);
+      let itemObj = self.itemManager.method.items(evt.returnValues._itemIndex).call()
+      console.log(itemObj);
+      alert("Item " + itemObj._identifier + " was paid, delivery now!");
     });
   }
 
